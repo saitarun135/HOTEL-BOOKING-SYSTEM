@@ -1,7 +1,11 @@
 public class Hotel
 {
-    public static void main(String args[]){
-        System.out.println("Welcome to the Hotel reservation system");
-    }
+    String hotelName;
+    int rates;
 
+    public Hotel(String hotelName,int rates)
+    {
+        this.hotelName=hotelName;
+        this.rates=rates;
+    }
 }
