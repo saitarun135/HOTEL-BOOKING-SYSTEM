@@ -24,6 +24,11 @@ public class HotelReservation {
         int index = cheapRateHotels.indexOf(cheap);
         return hotelList.get(index).getName();
     }
+    public boolean addHotelRates(String name, double weekday, double weekend ) {
+        Hotel hotel = new Hotel(name, weekday, weekend);
+        hotelList.add(hotel);
+        return !hotelList.isEmpty();
+    }
     }
 
 

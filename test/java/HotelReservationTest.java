@@ -31,12 +31,18 @@ public class HotelReservationTest {
             }else
                 System.out.println("Valid Date");
         }
-        boolean result = hotelReservation.addHotel("Hyatt", 999.00) &&
-                hotelReservation.addHotel("Lemon Tree", 1250.00) &&
-                hotelReservation.addHotel("Ginger", 1500.00);
-        if (result)
+        boolean result =hotelReservation.addHotel("Hyatt", 959.00) &&
+                        hotelReservation.addHotel("Lemon Tree", 1250.00) &&
+                        hotelReservation.addHotel("OYO", 1500.00);
+        //if (result)
             Assert.assertEquals("Hyatt", hotelReservation.findCheapestHotel(inputDate));
     }
-
+    @Test
+    public void givenWeekDayAndWeekendRatesForHotels_WhenAdded_ShouldReturn_TRUE() {
+        boolean result =hotelReservation.addHotelRates("Hyatt", 950.00, 1200.00) &&
+                        hotelReservation.addHotelRates("Lemon Tree", 1250.00, 1350.00) &&
+                        hotelReservation.addHotelRates("OYO", 1500.00, 1800.00);
+        Assert.assertTrue(result);
+    }
 
 }
