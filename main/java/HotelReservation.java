@@ -38,6 +38,11 @@ public class HotelReservation {
         hotelMap.put(name, hotelObject);
         return true;
     }
+    public boolean addHotel(String name, int regWeekdayRate, int regWeekendRate, int hotelRating, int rewWeekdayRate, int rewWeekendRate) {
+        Hotel hotelObject = new Hotel(name, regWeekdayRate, regWeekendRate, hotelRating, rewWeekdayRate, rewWeekendRate);
+        hotelMap.put(name, hotelObject);
+        return true;
+    }
 
     /**
      * Prints the hotels
