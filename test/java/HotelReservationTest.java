@@ -4,7 +4,7 @@ import org.junit.Test;
 
 public class HotelReservationTest {
     @Test
-    public  void whenNewHotelAdded_shouldReturnTrue() {
+    public void whenNewHotelAdded_shouldReturnTrue() {
         HotelReservation hotelReservationObject = new HotelReservation();
         Assert.assertTrue(hotelReservationObject.addHotel("Lakewood", 110));
         Assert.assertTrue(hotelReservationObject.addHotel("Bridgewood", 160));
@@ -22,10 +22,11 @@ public class HotelReservationTest {
         Assert.assertTrue(hotelReservation.addHotel("Lakewood", 110));
         Assert.assertTrue(hotelReservation.addHotel("Bridgewood", 160));
         Assert.assertTrue(hotelReservation.addHotel("Ridgewood", 220));
-        boolean result=hotelReservation.findCheapestHotel("10 Sep 2020", "11 Sep 2020");
+        boolean result = hotelReservation.findCheapestHotel("10 Sep 2020", "11 Sep 2020");
         Assert.assertTrue("Lakewood", result);
     }
 //
+
     /**
      * UC3 testing
      */
@@ -50,6 +51,14 @@ public class HotelReservationTest {
         Assert.assertTrue(hotelReservation.addHotel("Ridgewood", 220, 150));
         Assert.assertTrue(hotelReservation.findCheapestHotel("11 Sep 2020", "12 Sep 2020"));
     }
-    
 
+    @Test
+    public void whenNewHotelAddedWithRating_shouldReturnTrue() {
+        HotelReservation hotelReservationObject = new HotelReservation();
+        hotelReservationObject.addHotel("Lakewood", 110, 90, 3);
+        hotelReservationObject.addHotel("Bridgewood", 160, 60, 4);
+        hotelReservationObject.addHotel("Ridgewood", 220, 150, 5);
+
+        hotelReservationObject.printHotels();
+    }
 }
