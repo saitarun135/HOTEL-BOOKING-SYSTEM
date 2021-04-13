@@ -2,6 +2,8 @@ import org.junit.Assert;
 
 import org.junit.Test;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 public class HotelReservationTest {
     @Test
     public void whenNewHotelAdded_shouldReturnTrue() {
@@ -93,5 +95,16 @@ public class HotelReservationTest {
         hotelReservationObject.addHotel("Bridgewood", 150, 50, 4);
         hotelReservationObject.addHotel("Ridgewood", 220, 150, 5);
         Assert.assertTrue(hotelReservationObject.cheapestBestRatedHotel("Reward", "11 Sep 2020", "12 Sep 2020"));
+    }
+    //uc12
+    @Test
+    public void whenInvalidEntriesGiven_shouldThrowInvalidEntryException() {
+        HotelReservation hotelReservationObject = new HotelReservation();
+        hotelReservationObject.addHotel("Lakewood", 110, 90, 3, 80, 80);
+        hotelReservationObject.addHotel("Bridgewood", 150, 50, 4, 110, 50);
+        hotelReservationObject.addHotel("Ridgewood", 220, 150, 5, 100, 40);
+        assertThrows(InvalidEntryException.class, () -> {
+            hotelReservationObject.validateInputs("Random", "11 Sep 2020", "12 Sep 2020");
+        });
     }
 }
