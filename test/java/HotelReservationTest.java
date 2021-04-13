@@ -1,48 +1,55 @@
 import org.junit.Assert;
+
 import org.junit.Test;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-//import org.junit.jupiter.api.Assertions;
-
 public class HotelReservationTest {
-    HotelReservation hotelReservation = new HotelReservation();
+    @Test
+    public  void whenNewHotelAdded_shouldReturnTrue() {
+        HotelReservation hotelReservationObject = new HotelReservation();
+        Assert.assertTrue(hotelReservationObject.addHotel("Lakewood", 110));
+        Assert.assertTrue(hotelReservationObject.addHotel("Bridgewood", 160));
+        Assert.assertTrue(hotelReservationObject.addHotel("Ridgewood", 110));
 
-    @Test
-    public void checkedGivenHotelNameAndRateAreAdded_True()
-    {
-        boolean result = hotelReservation.addHotel("Lakewood",110.0);
-        Assert.assertTrue(result);
+        hotelReservationObject.printHotels();
     }
-    @Test
-    public void givenBookingDate_ShouldReturn_CheapestHotel(){
-        SimpleDateFormat df = new SimpleDateFormat("ddMMMMyyyy");
-        String inputDateString [] = {"10Sep2020", "11Sep2020"};
 
-        Date inputDate [] = null;
-        try {
-            inputDate = new Date[]{df.parse(inputDateString[0]), df.parse(inputDateString[1])};
-        }
-        catch (ParseException e){
-            System.out.println("Invalid Format");
-            if (!df.format(inputDateString).equals(inputDate)){
-                System.out.println("Invalid Date!!");
-            }else
-                System.out.println("Valid Date");
-        }
-        boolean result =hotelReservation.addHotel("Hyatt", 959.00) &&
-                        hotelReservation.addHotel("Lemon Tree", 1250.00) &&
-                        hotelReservation.addHotel("OYO", 1500.00);
-        //if (result)
-            Assert.assertEquals("Hyatt", hotelReservation.findCheapestHotel(inputDate));
-    }
+    /**
+     * UC2 Testing
+     */
     @Test
-    public void givenWeekDayAndWeekendRatesForHotels_WhenAdded_ShouldReturn_TRUE() {
-        boolean result =hotelReservation.addHotelRates("Hyatt", 950.00, 1200.00) &&
-                        hotelReservation.addHotelRates("Lemon Tree", 1250.00, 1350.00) &&
-                        hotelReservation.addHotelRates("OYO", 1500.00, 1800.00);
-        Assert.assertTrue(result);
+    public void whenFindCheapestHotelMethodCalled_shouldReturn_nameOfHotel() {
+        HotelReservation hotelReservation = new HotelReservation();
+        Assert.assertTrue(hotelReservation.addHotel("Lakewood", 110));
+        Assert.assertTrue(hotelReservation.addHotel("Bridgewood", 160));
+        Assert.assertTrue(hotelReservation.addHotel("Ridgewood", 220));
+        boolean result=hotelReservation.findCheapestHotel("10 Sep 2020", "11 Sep 2020");
+        Assert.assertTrue("Lakewood", result);
     }
+//
+    /**
+     * UC3 testing
+     */
+    @Test
+    public void whenNewHotelAddedWithWeekend_shouldReturnTrue() {
+        HotelReservation hotelReservationObject = new HotelReservation();
+        Assert.assertTrue(hotelReservationObject.addHotel("Lakewood", 110, 90));
+        Assert.assertTrue(hotelReservationObject.addHotel("Bridgewood", 160, 60));
+        Assert.assertTrue(hotelReservationObject.addHotel("Ridgewood", 220, 150));
+
+        hotelReservationObject.printHotels();
+    }
+
+    /**
+     * UC4 Testing
+     */
+    @Test
+    public void whenFindCheapestHotelIsCalled_shouldReturn_nameOfHotelWithCheapestRent() {
+        HotelReservation hotelReservation = new HotelReservation();
+        Assert.assertTrue(hotelReservation.addHotel("Lakewood", 110, 90));
+        Assert.assertTrue(hotelReservation.addHotel("Bridgewood", 160, 60));
+        Assert.assertTrue(hotelReservation.addHotel("Ridgewood", 220, 150));
+        Assert.assertTrue(hotelReservation.findCheapestHotel("11 Sep 2020", "12 Sep 2020"));
+    }
+    
 
 }

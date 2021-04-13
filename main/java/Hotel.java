@@ -1,40 +1,43 @@
 public class Hotel {
 
-    private final String name;
-    private final Double rates;
-    private final Double weekendRates;
+    public String hotelName;
+    public int regWeekdayRate;
+    public int regWeekendRate;
 
-    public Hotel(String name, Double rates) {
-        this.name = name;
-        this.rates = rates;
-        weekendRates = null;
+    public int getRegWeekendRate() {
+        return regWeekendRate;
     }
 
-    public Hotel (String name, Double rates, Double weekendRates){
-        this.name = name;
-        this.rates = rates;
-        this.weekendRates = weekendRates;
+    public void setRegWeekendRate(int regWeekendRate) {
+        this.regWeekendRate = regWeekendRate;
     }
 
-    public String getName() {
-        return name;
+    public String getHotelName() {
+        return hotelName;
     }
 
-    public Double getRates() {
-        return rates;
+    public void setHotelName(String hotelName) {
+        this.hotelName = hotelName;
     }
 
-    public Double getWeekendRates() {
-        return weekendRates;
+    public int getRegWeekdayRate() {
+        return regWeekdayRate;
     }
 
-    @Override
-    public String toString() {
-        return "Hotel{" +
-                "name='" + name + '\'' +
-                ", rates=" + rates +
-                ", weekendRates=" + weekendRates +
-                '}';
+    public void setRegWeekdayRate(int regWeekdayRate) {
+        this.regWeekdayRate = regWeekdayRate;
     }
 
+    public Hotel(String hotelName, int regWeekdayRate) {
+        super();
+        this.hotelName = hotelName;
+        this.regWeekdayRate = regWeekdayRate;
+    }
+
+    public Hotel(String hotelName, int regWeekdayRate, int regWeekendRate) {
+        super();
+        this.hotelName = hotelName;
+        this.regWeekdayRate = regWeekdayRate;
+        this.regWeekendRate = regWeekendRate;
+    }
 }
