@@ -5,6 +5,8 @@ import java.time.temporal.ChronoField;
 import java.util.*;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class HotelReservation {
     private static Map<String, Hotel> hotelMap;
@@ -139,13 +141,32 @@ public class HotelReservation {
         days[1] = numWeekendDays;
         return days;
     }
+    /**
+     * UC10 Handles the exception for invalid inout
+     *
+     * @param customerType
+     * @param fromDate
+     * @param toDate
+     * @throws InvalidEntryException
+     */
+    public void validateInputs(String customerType, String fromDate, String toDate) throws InvalidEntryException {
+        String regex = "^[0-9]{2}[ ][A-Za-z]{3}[ ][0-9]{4}$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcherFrom = pattern.matcher(fromDate);
+        Matcher matcherTo = pattern.matcher(toDate);
+        if (!matcherFrom.find() || !matcherTo.find() || !customerType.equalsIgnoreCase("Regular")
+                || !customerType.equalsIgnoreCase("Reward")) {
+            throw new InvalidEntryException("Invalid input, please enter a valid input");
+        }
+        return;
+    }
 
     public static void main(String[] args) {
 
         System.out.println("Welcome to Hotel Reservation Program");
     }
 
-    public boolean cheapestBestRatedHotel(String fromDate, String toDate) {
+    public boolean cheapestBestRatedHotel(String reward, String fromDate, String toDate) {
         Map<Integer, ArrayList<Hotel>> rentMap = createRentMap(fromDate, toDate);
         int minimumRent = Integer.MAX_VALUE;
         for (Map.Entry<Integer, ArrayList<Hotel>> entry : rentMap.entrySet()) {
@@ -175,7 +196,7 @@ public class HotelReservation {
                 rating = entry.getValue().getHotelRating();
                 bestRatedHotel = entry.getKey();
                 rent = calculateRent(fromDate, toDate, entry.getValue().getRegWeekdayRate(),
-                        entry.getValue().getRegWeekendRate());
+                                    entry.getValue().getRegWeekendRate());
             }
         }
         System.out.println("Best rated hotel : " + bestRatedHotel + ", Rent : " + rent);
