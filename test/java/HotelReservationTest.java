@@ -70,4 +70,12 @@ public class HotelReservationTest {
         hotelReservation.addHotel("Ridgewood", 220, 150, 5);
         Assert.assertTrue(hotelReservation.cheapestBestRatedHotel("11 Sep 2020", "12 Sep 2020"));
     }
+    @Test
+    public void whenFindBestRatedMethodCalled_shouldReturn_bestRatedHotel() {
+        HotelReservation hotelReservation = new HotelReservation();
+        hotelReservation.addHotel("Lakewood", 110, 90, 3);
+        hotelReservation.addHotel("Bridgewood", 150, 50, 4);
+        hotelReservation.addHotel("Ridgewood", 220, 150, 5);
+        Assert.assertTrue(hotelReservation.findBestRatedHotelForGivenDates("11 Sep 2020", "12 Sep 2020"));
+    }
 }

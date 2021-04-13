@@ -13,13 +13,6 @@ public class HotelReservation {
         hotelMap = new HashMap<>();
     }
 
-    /**
-     * UC1 adding hotel to the system
-     *
-     * @param name
-     * @param regularWeekday
-     * @return
-     */
     public boolean addHotel(String name, int regWeekdayRate) {
         Hotel hotelObject = new Hotel(name, regWeekdayRate);
         hotelMap.put(name, hotelObject);
@@ -167,4 +160,29 @@ public class HotelReservation {
                 + minimumRent + "\n");
         return true;
     }
+
+    public boolean findBestRatedHotelForGivenDates(String fromDate, String toDate) {
+        int rating = 0;
+        int rent = 0;
+        String bestRatedHotel = "";
+        for (Map.Entry<String, Hotel> entry : hotelMap.entrySet()) {
+            if (entry.getValue().getHotelRating() > rating) {
+                rating = entry.getValue().getHotelRating();
+                bestRatedHotel = entry.getKey();
+                rent = calculateRent(fromDate, toDate, entry.getValue().getRegWeekdayRate(),
+                        entry.getValue().getRegWeekendRate());
+            }
+        }
+        System.out.println("Best rated hotel : " + bestRatedHotel + ", Rent : " + rent);
+        return true;
+    }
+    public static int calculateRent(String fromDate, String toDate, int weekdayRate, int weekendRate) {
+        int[] numOfDays = numberOfDays(fromDate, toDate);
+        int weekdayRent = weekdayRate * numOfDays[0];
+        int weekendRent = weekendRate * numOfDays[1];
+        int totalRent = weekdayRent + weekendRent;
+        return totalRent;
+    }
+
+
 }
